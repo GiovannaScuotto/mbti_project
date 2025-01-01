@@ -1,6 +1,7 @@
-from django.shortcuts import render, redirect
-from .models import USERS, MBTI, ZODIAC, ENNEAGRAM
 from django.contrib import messages
+from django.shortcuts import render
+from django.contrib.auth import authenticate, login
+from .models import USERS, MBTI, ZODIAC, ENNEAGRAM
 
 def mbti_infp(request):
     mbti_data = MBTI.objects.filter(mbtid="INFP").first()
@@ -187,38 +188,73 @@ def personality_7w8(request):
     return render(request, '7w8.html', {'enneagram': enneagram_data})
 
 
-def register_login(request):
+def login_view(request):
+    if request.method == "GET":
+        return render(request, 'login.html')
+
     if request.method == "POST":
-        if 'register' in request.POST:
-            nick = request.POST.get('username')
-            mbti = request.POST.get('mbti')
-            enneagram = request.POST.get('enneagram')
+        email = request.POST.get('email').lower()
+        password = request.POST.get('password')
+
+        print(email, password)
+
+        user = authenticate(request, username=email, password=password)
+        if user is not None:
+            login(request, user)
+            return render(request, 'login.html')
+        else:
+            messages.error(request, "Credenziali errate")
+            return render(request, 'login.html')
+
+
+def register(request):
+    if request.method == "GET":
+        return render(request, 'signin.html')
+    if request.method == "POST":
+            nick = request.POST.get('nick').lower()
+            mbti = request.POST.get('mbti').upper()
+            enneagram = request.POST.get('enneagram').lower()
             birth = request.POST.get('birth')
-            email = request.POST.get('email')
+            email = request.POST.get('email').lower()
             password = request.POST.get('password')
 
-            new_user = USERS(
-                nick=nick,
-                mbti=MBTI.objects.get(mbtid=mbti),
-                enneagram=ENNEAGRAM.objects.get(enneagram=enneagram),
-                birth=birth,
-                email=email,
-                pwd=password
-            )
-            new_user.save()
+            print (nick, mbti, enneagram, birth, email, password)
+            
+            if USERS.objects.filter(nick=nick).exists():
+                messages.error(request, "Questo nickname è già registrato")
+                return render(request, 'signin.html')
 
-            messages.success(request, "Registrazione avvenuta con successo! Ora puoi accedere.")
-        
-        elif 'login' in request.POST:
-            email = request.POST.get('email')
-            password = request.POST.get('password')
+            if USERS.objects.filter(email=email).exists():
+                messages.error(request, "Questa email è già registrata")
+                return render(request, 'signin.html')
 
             try:
-                check_user = USERS.objects.get(email=email, pwd=password)
-                messages.success(request, "Accesso avvenuto con successo!")
-            except USERS.DoesNotExist:
-                messages.error(request, "Email o password errati.")
-        
-        # return redirect('register_login')
-    else:
-        return render(request, 'login.html') 
+                mbti_check = MBTI.objects.get(mbtid=mbti)
+            except MBTI.DoesNotExist:
+                messages.error(request, "MBTI non valido")
+                return render(request, 'signin.html')
+
+            try:
+               enneagram_check = ENNEAGRAM.objects.get(enneagram=enneagram)
+            except ENNEAGRAM.DoesNotExist:
+                messages.error(request, "Enneagramma non valido")
+                return render(request, 'signin.html')
+
+            try:
+                new_user = USERS(
+                    nick=nick,
+                    mbti=mbti,
+                    enneagram=enneagram,
+                    birth=birth,
+                    email=email,
+                    pwd=password
+                )
+
+                new_user.save()
+                messages.success(request, "Registrazione avvenuta con successo! Ora puoi accedere")
+                return render(request, 'login.html')
+            except Exception as e:
+                print(f"{e}")
+                messages.error(request, "Errore durante la registrazione")
+                return render(request, 'signin.html')
+    return render(request, 'signin.html')

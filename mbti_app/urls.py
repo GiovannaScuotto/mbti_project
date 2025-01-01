@@ -48,5 +48,6 @@ urlpatterns = [
     path('7w8', views.personality_7w8, name='enneagram_data'),
     path('5w4', views.personality_5w4, name='enneagram_data'),
     path('5w6', views.personality_5w6, name='enneagram_data'),
-    path('login', views.register_login, name='register_login'),
+    path('login', views.login_view, name='login_view'),
+    path('signin', views.register, name='register'),
 ]

@@ -30,8 +30,8 @@ class ENNEAGRAM(models.Model):
 
 class USERS(models.Model):
     nick = models.TextField(primary_key=True)
-    mbti = models.ForeignKey(MBTI, on_delete=models.DO_NOTHING, to_field='mbtid', null=True, blank=True)
-    enneagram = models.ForeignKey(ENNEAGRAM, on_delete=models.DO_NOTHING, to_field='enneagram', null=True, blank=True)
+    mbti = models.CharField(max_length=4)
+    enneagram = models.CharField(max_length=3)
     birth = models.DateField()
     email = models.EmailField(unique=True)
     pwd = models.TextField()

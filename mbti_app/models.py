@@ -29,12 +29,13 @@ class ENNEAGRAM(models.Model):
 
 
 class USERS(models.Model):
-    nick = models.TextField(primary_key=True)
+    nick = models.TextField(primary_key=True, unique=True)
     mbti = models.CharField(max_length=4)
     enneagram = models.CharField(max_length=3)
     birth = models.DateField()
     email = models.EmailField(unique=True)
     pwd = models.TextField()
+    last_login= models.DateTimeField(default=None)
 
     class Meta:
         db_table = 'users'

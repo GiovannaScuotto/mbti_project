@@ -1,11 +1,15 @@
 from django.contrib import messages
 from django.shortcuts import render
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import login
 from .models import USERS, MBTI, ZODIAC, ENNEAGRAM
+from .authentication import EmailBackend
+from django.contrib.sessions.models import Session
 
 def mbti_infp(request):
     mbti_data = MBTI.objects.filter(mbtid="INFP").first()
-    return render(request, 'INFP.html', {'mbti': mbti_data})
+    nick = request.session.get('nick', 'Guest')
+    print(f"(GET): {nick}")
+    return render(request, 'INFP.html', {'mbti': mbti_data, 'nick': nick})
 
 def mbti_enfp(request):
     mbti_data = MBTI.objects.filter(mbtid="ENFP").first()
@@ -190,22 +194,37 @@ def personality_7w8(request):
 
 def login_view(request):
     if request.method == "GET":
-        return render(request, 'login.html')
+        nick = request.session.get('nick', 'Guest')
+        print(f"(GET): {nick}")
+        return render(request, 'login.html', {'nick': nick})
 
     if request.method == "POST":
-        email = request.POST.get('email').lower()
+        nick = request.POST.get('nick').lower()
         password = request.POST.get('password')
 
-        print(email, password)
+        print(nick, password)
 
-        user = authenticate(request, username=email, password=password)
-        if user is not None:
-            login(request, user)
+        try:
+            user = USERS.objects.get(nick=nick)
+        except USERS.DoesNotExist:
+            messages.error(request, "Credenziali errate")
+            return render(request, 'login.html')
+
+        if user.pwd == password:
+            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+            messages.success(request, "Login effettuato")
+            request.session['nick'] = nick
             return render(request, 'login.html')
         else:
             messages.error(request, "Credenziali errate")
             return render(request, 'login.html')
 
+def logout_view(request):
+    if request.method == "GET":
+        Session.objects.all().delete()
+        nick = request.session.get('nick', 'Guest')
+        messages.success(request, "Logout effettuato")
+    return render(request, 'login.html', {'nick': nick})
 
 def register(request):
     if request.method == "GET":
@@ -258,3 +277,4 @@ def register(request):
                 messages.error(request, "Errore durante la registrazione")
                 return render(request, 'signin.html')
     return render(request, 'signin.html')
+

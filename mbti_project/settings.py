@@ -102,6 +102,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'mbti_app.authentication.EmailBackend',
+    'django.contrib.auth.backends.ModelBackend',  # Il backend di default (opzionale)
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/

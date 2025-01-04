@@ -4,6 +4,7 @@ from django.contrib.auth import login
 from .models import USERS, MBTI, ZODIAC, ENNEAGRAM
 from .authentication import EmailBackend
 from django.contrib.sessions.models import Session
+from .get_zodiac import get_zodiac
 
 def mbti_infp(request):
     mbti_data = MBTI.objects.filter(mbtid="INFP").first()
@@ -278,3 +279,37 @@ def register(request):
                 return render(request, 'signin.html')
     return render(request, 'signin.html')
 
+def profile(request):
+    if request.method == "GET":
+        nick = request.session.get('nick', 'Guest')
+        if nick=='Guest':
+            return render(request, 'login.html', {'nick': nick})
+        else:
+            try:
+                user= USERS.objects.get(nick=nick)
+                
+                mbti_data = MBTI.objects.get(mbtid=user.mbti)
+                mbti_descr = mbti_data.descr
+                print(mbti_data)
+
+                enneagram_data = ENNEAGRAM.objects.get(enneagram=user.enneagram)
+                enneagram_descr = enneagram_data.descr
+                print (enneagram_data)
+
+                zodiac_sign = get_zodiac(user.birth)
+                zodiac_data = ZODIAC.objects.get(sign=zodiac_sign)
+                zodiac_descr = zodiac_data.descr
+                print({zodiac_sign})
+
+                return render(request, 'profile.html', {
+                'nickname': user.nick,
+                'mbti': mbti_data,
+                'mbti_descr': mbti_descr,
+                'enneagram': enneagram_data,
+                'enneagram_descr': enneagram_descr,
+                'zodiac': zodiac_data,
+                'zodiac_descr': zodiac_descr,
+                'nick': nick
+                    })
+            except USERS.DoesNotExist:
+                return render(request, 'profile.html', {'nick': nick})

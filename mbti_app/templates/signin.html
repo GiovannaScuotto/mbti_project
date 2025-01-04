@@ -296,12 +296,17 @@
                 <li class="has-submenu">
                     USERS
                     <ul>
-                            <li><a href="/login">Register & Login</a></li>
-                            <li><a href="/myprofile"></a>Profile</li>
-                            <li><a href="/check">User compatibility</a></li>
+                      {% if nick == 'Guest' %}
+                      <li><a href="/login">Login</a></li>
+                              <li><a href="/signin">Register</a></li>
+                              {% else %}
+                              <li><a href="/profile">Profile</a></li>
+                              <li><a href="/check">User compatibility</a></li>
+                              <li><a href="/logout">Logout</a></li>
+                              {% endif %}
                         </ul>
             </li>
-                            <li><a href="#flyoutnavmousefixed">CONTACT</a></li>
+                            <li><a href="/contact">CONTACT</a></li>
                     
             </nav>
     

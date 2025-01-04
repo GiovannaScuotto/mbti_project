@@ -192,6 +192,9 @@ def personality_7w8(request):
     enneagram_data = ENNEAGRAM.objects.filter(enneagram="7w8").first()
     return render(request, '7w8.html', {'enneagram': enneagram_data})
 
+def homepage(request):
+    if request.method == "GET":
+        return render(request, 'home.html')
 
 def login_view(request):
     if request.method == "GET":
@@ -313,3 +316,5 @@ def profile(request):
                     })
             except USERS.DoesNotExist:
                 return render(request, 'profile.html', {'nick': nick})
+            
+

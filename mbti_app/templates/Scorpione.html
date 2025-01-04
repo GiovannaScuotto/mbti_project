@@ -207,16 +207,21 @@
                           </ul>
               </li>
               <li class="has-submenu">
-                  USERS
-                  <ul>
-                          <li><a href="/register">Sign up</a></li>
-                          <li><a href="/login">Login</a></li>
-                          <li><a href="/check">User viewer</a></li>
-                      </ul>
-          </li>
-                          <li><a href="#flyoutnavmousefixed">CONTACT</a></li>
-                  
-          </nav>
+                USERS
+                <ul>
+                  {% if nick == 'Guest' %}
+                  <li><a href="/login">Login</a></li>
+                          <li><a href="/signin">Register</a></li>
+                          {% else %}
+                          <li><a href="/profile">Profile</a></li>
+                          <li><a href="/check">User compatibility</a></li>
+                          <li><a href="/logout">Logout</a></li>
+                          {% endif %}
+                    </ul>
+        </li>
+                        <li><a href="/contact">CONTACT</a></li>
+                
+        </nav>
                     <div class="box-arrotondata">
                       {% if zodiacsign %}
                       <h1 class="h1">Segno zodiacale: {{ zodiacsign.sign }} </h1>

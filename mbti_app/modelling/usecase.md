@@ -1,6 +1,6 @@
 # Diagramma caso d'uso
 
-(./images/usecase.png)
+(./modelling/images/usecase.png)
 
 In questo diagramma abbiamo due attori:
 - Utente non registrato: L'attore che interagisce con il sistema.

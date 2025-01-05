@@ -1,6 +1,6 @@
 # Diagramma di stato
 
-(./images/stato.png)
+(./modelling/images/stato.png)
 
 L'utente inizia nello stato di Non Registrato, quindi può passare attraverso le varie transizioni come Registrazione o Login.
 Abbiamo tre stati:

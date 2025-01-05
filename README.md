@@ -1,5 +1,5 @@
 # MBTI PROJECT 🔮
-This is Project for the Generation Italy Data Engineering Course. API Python with Django library.
+This is a project for the Generation Italy Data Engineering Course. API Python with Django library.
 
 ## Dependencies:
 - Django
@@ -16,10 +16,11 @@ This is Project for the Generation Italy Data Engineering Course. API Python wit
 - DB: Postegres
 
 ## Documents:
+- [Diagram ER](https://github.com/GiovannaScuotto/mbti_project/blob/main/mbti_app/modelling/ER.md)
+- [Diagram Class](https://github.com/GiovannaScuotto/mbti_project/blob/main/mbti_app/modelling/class.md)
 - [Diagram State](https://github.com/GiovannaScuotto/mbti_project/blob/main/mbti_app/modelling/state.md)
 - [Diagram Use case](https://github.com/GiovannaScuotto/mbti_project/blob/main/mbti_app/modelling/usecase.md)
 - [Diagram Sequence](https://github.com/GiovannaScuotto/mbti_project/blob/main/mbti_app/modelling/sequence.md)
-- [Diagram ER][#]
 
 ## Made by:
 - Giovanna Scuotto

@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.shortcuts import render
 from django.contrib.auth import login
-from .models import USERS, MBTI, ZODIAC, ENNEAGRAM
+from .models import USERS, MBTI, ZODIAC, ENNEAGRAM, COMPATIBILITY
 from .authentication import EmailBackend
 from django.contrib.sessions.models import Session
 from .get_zodiac import get_zodiac
@@ -360,4 +360,28 @@ def profile(request):
         except USERS.DoesNotExist:
             return render(request, 'login.html', {'nick': nick})
             
+def user_list(request):
+    nick = request.session.get('nick', 'Guest')
+    if nick=='Guest':
+        return render(request, 'login.html', {'nick': nick})
+    else:
+        users = USERS.objects.exclude(nick=nick)
+        return render(request, 'check.html', {'users': users, 'nick': nick})
 
+def compatibility(request):
+    nick = request.session.get('nick', 'Guest')
+    if nick == 'Guest':
+        return render(request, 'login.html', {'nick': nick})
+    else:
+        user = USERS.objects.get(nick=nick)
+        user_mbti = user.mbti
+
+    select_mbti = request.GET.get('mbti')
+
+    if select_mbti:
+        compatibility = COMPATIBILITY.objects.filter(mbti1=user_mbti, mbti2=select_mbti).first()
+        
+        if not compatibility:
+            compatibility = COMPATIBILITY.objects.filter(mbti1=select_mbti, mbti2=user_mbti).first()
+        return render(request, 'compatibility.html', {'compatibility': compatibility, 'nick': nick})
+    return render(request, 'compatibility.html', {'compatibility': compatibility, 'nick': nick})

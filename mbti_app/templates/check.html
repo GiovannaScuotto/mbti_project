@@ -99,72 +99,50 @@
        color:  white;
     }
           
-          .box-arrotondata {
-            background-color: #40444c;
-            border: 7px solid #aac293;
-            border-radius: 50px; 
-            box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
-            max-width: 1500px;
-            margin: 30px auto;
-            padding: 20px;
-            position: relative;
-            padding-bottom: 100px;
-        }
-        
-        .paragraph {
-            font-family: "Montserrat", sans-serif;
+    .table {
+    background-color: #aac293;
+    border-style: hidden;
+    border-radius: 50px;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
+    max-width: 1500px;
+    margin: 30px auto;
+    padding: 20px;
+    width: 100%;
+    border-spacing: 5px;
+}
+
+.table th, .table td {
+    border-radius: 10px;
+    text-align: center;
+}
+
+.table th {
+    border-style: hidden;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 45px;
+    font-weight: 700;
+    background: linear-gradient(100deg, #86e3e7, #fec2ae, #fee9be, #feced8, #d6c1ec);
+    text-transform: uppercase;
+    color: #40444c;
+}
+
+.table td {
+    border-style: hidden;
+    color: white;
+    font-family: "Montserrat", sans-serif;
        font-weight: 600;
        line-height: 1.5;
-       font-size: 19px;
-           text-wrap: balance;
-           text-align: justify;
-        }
-        
-        .h1 {
-    font-family: 'Quicksand', sans-serif;
-    font-size: 50px;
-    font-weight: 700;
-    text-align: center;
-    background: linear-gradient(100deg, #86e3e7, #fec2ae, #fee9be, #feced8, #d6c1ec);
-    border-radius: 55px;
-    margin: 0;
-    color: #40444c;
-    text-transform: uppercase;
+       font-size: 25px;
 }
 
-.h2 {
-    font-family: 'Quicksand', sans-serif;
-    font-size: 30px;
-    font-weight: 700;
-    text-align: center;
-    margin: 0;
+.table tr:nth-child(odd) td {
+    background-color: #5d6167;
+    color: white;
 }
 
-.btn {
-              width: auto;
-              padding: 12px 0;
-              border: none;
-              border-radius: 20px;
-              background: rgb(135, 134, 134);
-              color: white;
-              font-size: 20px;
-              font-weight: bold;
-              cursor: pointer;
-              transition: 0.3s;
-          }
-          
-          .btn:hover {
-              background: linear-gradient(100deg, #d6c1ec, #feced8,  #fec2ae,#fee9be, #86e3e7 );
-          }
-
-          .btn-container {
-    position: absolute;
-    right: 10px;
-    bottom: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px; 
-          }
+.table tr:nth-child(even) td {
+    background-color: #40444c;
+}
     
             </style>
             
@@ -256,37 +234,46 @@
                     
             </nav>
             
-                      <div class="box-arrotondata">
-                        {% block content %}
-                        <h1 class="h1">{{ nickname }} ti diremo chi sei! ദ്ദി( •̀ ᴗ - )</h1>
-                        <p class="paragraph">
-                            <h2 class="h2">Tra le 16 personalità del MBTI sei <strong>{{ mbti.mbtid }}:</strong></h2>
-                    {{ mbti.descr }}</br></br>
-                    <h2 class="h2">Il tuo enneagramma è <strong>{{ enneagram.enneagram }}:</strong></h2>
-                    {{ enneagram.descr }}</br></br>
-                    <h2 class="h2">Il tuo segno zodiacale è <strong>{{zodiac.sign}}:</strong></h2>
-                    {{ zodiac.descr }}
-    {% endblock %}
-    <div class="btn-container">
-        <a href="/check" class="btn">VAI ALLA LISTA UTENTI ⮩</a>
-    </div>
-                    </p>
-                    </div>
-                    </html>
-    </body>                
-        
-            <script>
-            var menuItems1 = document.querySelectorAll('#flyoutnavmousefixed li.has-submenu');
-        
-        Array.prototype.forEach.call(menuItems1, function(el) {
-            // Mostra il menu quando il mouse passa sopra
-            el.addEventListener("mouseover", function() {
-                this.classList.add("open");
-            });
-        
-            // Nasconde il menu subito dopo che il mouse esce
-            el.addEventListener("mouseout", function() {
-                this.classList.remove("open");
-            });
-        });
-        </script>
+    <table border="1" class="table">
+        <thead>
+            <tr class="tr">
+                <th>Utente</th>
+                <th>MBTI</th>
+                <th>Enneagram</th>
+                <th>Compatibilità</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.nick }}</td>
+                <td>{{ user.mbti }}</td>
+                <td>{{ user.enneagram }}</td>
+                <td>
+                    <a href="{% url 'compatibility' %}?mbti={{ user.mbti }}">
+                        <img src="{% static 'images/comp_icon.png' %}" alt="Compatibilità" style="width: 50px; height: 50px;"/>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</html>
+</body>                
+
+<script>
+var menuItems1 = document.querySelectorAll('#flyoutnavmousefixed li.has-submenu');
+
+Array.prototype.forEach.call(menuItems1, function(el) {
+// Mostra il menu quando il mouse passa sopra
+el.addEventListener("mouseover", function() {
+this.classList.add("open");
+});
+
+// Nasconde il menu subito dopo che il mouse esce
+el.addEventListener("mouseout", function() {
+this.classList.remove("open");
+});
+});
+</script>

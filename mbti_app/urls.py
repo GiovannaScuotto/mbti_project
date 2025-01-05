@@ -53,4 +53,6 @@ urlpatterns = [
     path('signin', views.register, name='register'),
     path('logout', views.logout_view, name='logout_view'),
     path('profile', views.profile, name='profile'),
+    path('check', views.user_list, name='user_list'),
+    path('compatibility', views.compatibility, name='compatibility'),
 ]

@@ -39,3 +39,13 @@ class USERS(models.Model):
 
     class Meta:
         db_table = 'users'
+
+class COMPATIBILITY(models.Model):
+    mbti1 = models.CharField(max_length=4, primary_key=True)
+    mbti2 = models.CharField(max_length=4)
+    rate = models.SmallIntegerField()
+    descr = models.TextField()
+
+    class Meta:
+        unique_together = ('mbti1', 'mbti2')
+        db_table = 'compatibility'

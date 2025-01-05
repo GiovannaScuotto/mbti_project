@@ -8,7 +8,7 @@ Abbiamo tre stati:
 - Registrato: Lo stato in cui l'utente si è registrato ma non ha ancora effettuato il login.
 - Loggato: Lo stato in cui l'utente è autenticato dopo il login.
 
-Transizioni:
+## Transizioni:
 - Registrazione: Un utente non registrato può passare allo stato "Registrato" tramite la registrazione.
 - Login: Un utente registrato può effettuare il login e passare allo stato "Loggato".
 - Logout: Un utente loggato può fare il logout e tornare allo stato "Registrato" o "Non Registrato".

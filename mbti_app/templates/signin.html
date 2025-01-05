@@ -86,8 +86,6 @@
         
         }
         
-                /* talewindheader */
-        
         *,
         *::before,
         *::after {
@@ -99,7 +97,6 @@
            text-decoration: none;
         }
         
-        /* Container and Form */
     body {
         font-size: clamp(1rem, 2vw, 1.125rem);
         font-weight: 400;
@@ -112,7 +109,6 @@
         padding-top: 60px;
     }
     
-    /* Gradient Animation */
     @keyframes gradient-bg {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
@@ -225,9 +221,16 @@
         
         </style>
     
-        <html>
+    <!DOCTYPE html>
+    <html lang="it">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Registrazione</title>
                 <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
                 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+            </head>
+
         <nav aria-label="(Example) Main" id="flyoutnavmousefixed">
              
                     <ul>
@@ -311,7 +314,6 @@
             </nav>
     
         <body>
-                              <!-- Mostra i messaggi di successo o errore -->
                 {% if messages %}
                 <div class="messages">
                     {% for message in messages %}
@@ -322,7 +324,6 @@
                 </div>
             {% endif %}
             
-                    <!-- Signup Form -->
                    <form method="POST" action="{% url 'register' %}" class="form signup">
                         {% csrf_token %}
                       <h2>CREA IL TUO ACCOUNT ✨</h2>
@@ -351,6 +352,7 @@
                       </p>
                     </form>
             </body>
+            </html>
     
             <script>
                 var menuItems1 = document.querySelectorAll('#flyoutnavmousefixed li.has-submenu');
@@ -368,5 +370,3 @@
             });
     
             </script>
-    
-        </html>

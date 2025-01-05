@@ -147,10 +147,16 @@
         </style>
         
         {% load static %}
-        <html>
+        <!DOCTYPE html>
+            <html lang="it">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>MBTI INFP</title>
             <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
             <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
             <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+            </head>
 
     <nav aria-label="(Example) Main" id="flyoutnavmousefixed">
          
@@ -234,6 +240,7 @@
                 
         </nav>
         
+    <body>
                   <img src="https://i.pinimg.com/736x/76/d7/cc/76d7cc75a0a274009e26bf27b621a305.jpg">
                   <div class="box-arrotondata">
                     {% if mbti %}
@@ -253,6 +260,7 @@
     {% endif %}
                     </p>
                 </div>
+                </body>
         </html>
     
         <script>

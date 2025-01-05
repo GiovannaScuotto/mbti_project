@@ -1,6 +1,6 @@
 # Diagramma di sequenza
 
-(./modelling/images/sequenza.png)
+![Diagramma di sequenza](./modelling/images/sequenza.png)
 
 Ogni partecipante (attore o sistema) è rappresentato da una colonna verticale.
 Le frecce orizzontali tra i partecipanti rappresentano i messaggi che vengono inviati.

@@ -385,3 +385,7 @@ def compatibility(request):
             compatibility = COMPATIBILITY.objects.filter(mbti1=select_mbti, mbti2=user_mbti).first()
         return render(request, 'compatibility.html', {'compatibility': compatibility, 'nick': nick})
     return render(request, 'compatibility.html', {'compatibility': compatibility, 'nick': nick})
+
+def contact(request):
+    nick = request.session.get('nick', 'Guest')
+    return render(request, 'contact.html', {'nick': nick})

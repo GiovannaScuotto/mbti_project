@@ -55,4 +55,5 @@ urlpatterns = [
     path('profile', views.profile, name='profile'),
     path('check', views.user_list, name='user_list'),
     path('compatibility', views.compatibility, name='compatibility'),
+    path('contact', views.contact, name='contact'),
 ]

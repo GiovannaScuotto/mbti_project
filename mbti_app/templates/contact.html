@@ -1,0 +1,285 @@
+<style>
+
+#flyoutnavmousefixed {
+              width: 100%;
+              background-color: white;
+              box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+              color: rgb(78, 78, 78);
+              position: fixed;
+              top: 0;
+              left: 0;
+              z-index: 100;
+              padding: 0;
+              margin: 0;
+          }
+          
+          #flyoutnavmousefixed > ul {
+              width: 100%;
+              height: 60px;
+              margin: 0;
+              padding: 0;
+              background-color: white;
+              box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+              color: rgb(78, 78, 78);
+              display: flex;
+              justify-content: space-around;
+              align-items: center;
+              position: relative;
+          }
+              
+              #flyoutnavmousefixed > ul > li {
+                  display: table-cell;
+                  width: 20%;
+                  text-align: center;
+                  font-weight: bold;
+                  letter-spacing: 1px;
+                  font-family: 'Poppins', sans-serif;
+                  text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.3);
+                  position: relative;
+              }
+              
+              #flyoutnavmousefixed > ul > li > a {
+                  display: block;
+                  padding: 15px;
+                  color: rgb(78, 78, 78);
+                  text-decoration: none;
+                  border-radius: 10px;
+              }
+              
+              #flyoutnavmousefixed > ul > li > ul {
+                  display: none;
+                  position: absolute;
+                  top: 100%;
+                  left: 0;
+                  width: 100%;
+                  padding: 0;
+                  background: linear-gradient(0deg,  #c5c5c5, #8f8f8f, #adadad, #9b9b9b);
+                  border-radius: 10px;
+                  opacity: 0;
+                  z-index: 10;
+                  list-style: none;
+                  list-style-type: none;
+                  transition: opacity 0.3s ease;
+              }
+              
+              #flyoutnavmousefixed > ul > li:hover > a,
+              #flyoutnavmousefixed > ul > li.open > ul {
+                  display: block;
+                  opacity: 1;
+                  visibility: visible; 
+                  height: auto;
+                  background-color: rgb(135, 134, 134);
+                  color: white;
+              }
+              
+              #flyoutnavmousefixed > ul > li > ul a {
+                  display: flex;
+                  justify-content: center;
+                  color: white;
+                  text-decoration: none;
+                  border-radius: 10px;
+              }
+              
+              #flyoutnavmousefixed > ul > li > ul a:hover{
+                  background-color: rgb(78, 78, 78);
+                  color: white;
+              
+              }
+
+*,
+    *::before,
+    *::after {
+       padding: 0;
+       margin: 0;
+       box-sizing: border-box;
+       list-style: none;
+       list-style-type: none;
+       text-decoration: none;
+    }
+
+body {
+    font-size: clamp(1rem, 2vw, 1.125rem);
+       font-weight: 400;
+       line-height: 1.5;
+    background-color:rgba(217, 217, 217, 0.996);
+    background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+    background-blend-mode: overlay;
+ }
+
+ h1{
+    font-family: "Pacifico", serif;
+  font-weight: 600;
+  font-style: normal;
+    font-size: 55px;
+ }
+
+ .paragraph{
+    font-family: "Barlow Condensed", serif;
+    font-size: 30px;
+  font-weight: 600;
+  font-style: bold;
+    color:  rgb(0, 0, 0);
+ }
+
+ .container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+    text-align: center;
+    height: 100vh;
+    padding: 20px;
+    margin: 0;
+ }
+
+ .social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.social-icons a img {
+    width: 50px;
+    height: 50px;
+}
+
+</style>
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact me</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+
+<body style="background-image: url('{% static 'images/bg_me.jpg' %}')">
+
+<nav aria-label="(Example) Main" id="flyoutnavmousefixed">
+         
+    <ul>
+            <li><a href="/">HOME</a></li>
+            <li class="has-submenu">
+                MBTI
+                <ul>
+                        <li><a href="/infp">INFP</a></li>
+                        <li><a href="/enfp">ENFP</a></li>
+                        <li><a href="/infj">INFJ</a></li>
+                        <li><a href="/enfj">ENFJ</a></li>
+                        <li><a href="/intj">INTJ</a></li>
+                        <li><a href="/entj">ENTJ</a></li>
+                        <li><a href="/intp">INTP</a></li>
+                        <li><a href="/entp">ENTP</a></li>
+                        <li><a href="/isfp">ISFP</a></li>
+                        <li><a href="/esfp">ESFP</a></li>
+                        <li><a href="/istp">ISTP</a></li>
+                        <li><a href="/estp">ESTP</a></li>
+                        <li><a href="/isfj">ISFJ</a></li>
+                        <li><a href="/esfj">ESFJ</a></li>
+                        <li><a href="/istj">ISTJ</a></li>
+                        <li><a href="/estj">ESTJ</a></li>
+                </ul>
+        </li>
+        <li class="has-submenu">
+            ENNEAGRAM
+            <ul>
+                    <li><a href="/1w9">1w9</a></li>
+                    <li><a href="/1w2">1w2</a></li>
+                    <li><a href="/2w1">2w1</a></li>
+                    <li><a href="/2w3">2w3</a></li>
+                    <li><a href="/3w2">3w2</a></li>
+                    <li><a href="/3w4">3w4</a></li>
+                    <li><a href="/4w3">4w3</a></li>
+                    <li><a href="/4w5">4w5</a></li>
+                    <li><a href="/5w4">5w4</a></li>
+                    <li><a href="/5w6">5w6</a></li>
+                    <li><a href="/6w5">6w5</a></li>
+                    <li><a href="/6w7">6w7</a></li>
+                    <li><a href="/7w6">7w6</a></li>
+                    <li><a href="/7w8">7w8</a></li>
+                    <li><a href="/8w7">8w7</a></li>
+                    <li><a href="/8w9">8w9</a></li>
+                    <li><a href="/9w8">9w8</a></li>
+                    <li><a href="/9w1">9w1</a></li>
+            </ul>
+    </li>
+    <li class="has-submenu">
+        ZODIAC
+        <ul>
+                <li><a href="/ariete">Ariete</a></li>
+                <li><a href="/toro">Toro</a></li>
+                <li><a href="/gemelli">Gemelli</a></li>
+                <li><a href="/cancro">Cancro</a></li>
+                <li><a href="/leone">Leone</a></li>
+                <li><a href="/vergine">Vergine</a></li>
+                <li><a href="/bilancia">Bilancia</a></li>
+                <li><a href="/scorpione">Scorpione</a></li>
+                <li><a href="/sagittario">Sagittario</a></li>
+                <li><a href="/capricorno">Capricorno</a></li>
+                <li><a href="/acquario">Acquario</a></li>
+                <li><a href="/pesci">Pesci</a></li>
+            </ul>
+</li>
+<li class="has-submenu">
+    USERS
+    <ul>
+      {% if nick == 'Guest' %}
+      <li><a href="/login">Login</a></li>
+              <li><a href="/signin">Register</a></li>
+              {% else %}
+              <li><a href="/profile">Profile</a></li>
+              <li><a href="/check">User compatibility</a></li>
+              <li><a href="/logout">Logout</a></li>
+              {% endif %}
+        </ul>
+</li>
+            <li><a href="/contact">CONTACT</a></li>
+    
+</nav>
+
+<div class="container">
+    <img src="{% static 'images/me.png' %}" style="width: 250px; height: 250px;"/>
+    <h1 class="h1">Giovanna Scuotto</h1>
+    <p class="paragraph">
+     Aspirant Creative Technologist
+    </p>
+    <div class="social-icons">
+        <a href="https://www.linkedin.com/in/giovanna-scuotto/">
+            <img src="{% static 'images/linkedin.png' %}" />
+        </a> 
+        <a href="https://www.facebook.com/profile.php?id=100018594789783">
+            <img src="{% static 'images/facebook.png' %}" />
+        </a> 
+        <a href="https://github.com/GiovannaScuotto">
+            <img src="{% static 'images/github.png' %}" />
+        </a> 
+        <a href="mailto:scuottogiovanna@gmail.com">
+            <img src="{% static 'images/mail.png' %}" />
+        </a>
+    </div>
+</div>
+</body>
+</html>
+
+<script>
+    var menuItems1 = document.querySelectorAll('#flyoutnavmousefixed li.has-submenu');
+
+Array.prototype.forEach.call(menuItems1, function(el) {
+    // Mostra il menu quando il mouse passa sopra
+    el.addEventListener("mouseover", function() {
+        this.classList.add("open");
+    });
+
+    // Nasconde il menu subito dopo che il mouse esce
+    el.addEventListener("mouseout", function() {
+        this.classList.remove("open");
+    });
+});
+</script>
